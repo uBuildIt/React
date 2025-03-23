@@ -17,8 +17,8 @@ const ChatHistory = (props: ChatHistoryProps) => {
                              style={{
                                  borderRadius: '8px',
                                  position: 'relative',
-                                 marginLeft: isIncoming ? '1rem' : 'auto', // Incoming messages on the left, outgoing on the right
-                                 marginRight: isIncoming ? 'auto' : '1rem', // Outgoing messages have margin on the right
+                                 marginLeft: !isIncoming ? '1rem' : 'auto', // Incoming messages on the right, outgoing on the left
+                                 marginRight: !isIncoming ? 'auto' : '1rem', // Outgoing messages have margin on the left
                              }}>
                             <p className="text-gray-800 mb-1">{msg.Text}</p>
                             <small className="text-gray-500 text-xs block text-right">
