@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.15",
+    "framer-motion": "^12.5.0",
+    "lucide-react": "^0.483.0",
     "moment": "^2.30.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-feather": "^2.0.10",
     "tailwindcss": "^4.0.15",
     "uuid": "^11.1.0"
   },
