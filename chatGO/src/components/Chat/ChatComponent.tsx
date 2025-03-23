@@ -12,7 +12,7 @@ const ChatComponent = () => {
 
     useEffect(() => {
         socketRef.current = createWebsocket({
-            url: "wss://8ef8-112-134-188-47.ngrok-free.app/ws-chat",
+            url: "ws://localhost:8080/ws-chat",
             onMessage: onMessage,
             onOpen: onOpen,
             onClose: onClose,
