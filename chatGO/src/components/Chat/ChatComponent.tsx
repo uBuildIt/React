@@ -12,7 +12,7 @@ const ChatComponent = () => {
 
     useEffect(() => {
         socketRef.current = createWebsocket({
-            url: "ws://localhost:8080/ws-chat",
+            url: import.meta.env.VITE_CHATGO_WEBSOCKET_URL,
             onMessage: onMessage,
             onOpen: onOpen,
             onClose: onClose,
