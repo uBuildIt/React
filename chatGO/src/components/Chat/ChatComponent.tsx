@@ -55,11 +55,8 @@ const ChatComponent = () => {
 
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
-
             <div className="flex flex-col w-full max-w-2xl h-5/6 mx-auto rounded-lg overflow-hidden shadow-xl bg-white">
-                <div className="absolute top-0 left-0 w-full h-[150px] p-4">
-                    <ChatBar />
-                </div>
+                <ChatBar />
                 <ChatHistory history={history}/>
                 {isConnected ?
                     <ChatInput socket={socketRef.current} onSendMessage={onSendMessage} /> :
