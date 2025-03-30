@@ -1,14 +1,15 @@
-import { createWebsocket } from "../../routes/websocket.tsx";
-import { useEffect, useRef, useState } from "react";
+import {createWebsocket} from "../../routes/websocket.tsx";
+import {useEffect, useRef, useState} from "react";
 import ChatHistory from "./ChatHistory.tsx";
 import ChatInput from "./ChatInput.tsx";
-import { Message } from "../../utilities/props.tsx";
+import {Message} from "../../utilities/props.tsx";
 import ChatBar from "./ChatBar.tsx";
 
 const ChatComponent = () => {
     const socketRef = useRef<WebSocket | null>(null);
     const [history, setHistory] = useState<Message[]>([]);
     const [isConnected, setIsConnected] = useState<boolean>(false);
+    const [systemMessage, setSystemMessage] = useState<string | null>(null);
 
     useEffect(() => {
         socketRef.current = createWebsocket({
@@ -28,10 +29,12 @@ const ChatComponent = () => {
     }, []);
 
     const onMessage = (data: string) => {
-        console.log("OnMessage", data);
         const msg = JSON.parse(data);
-        setHistory(prevHistory => [...prevHistory, msg]);
-        console.log(data);
+        if (!msg.system_message) {
+            setSystemMessage(null)
+            setHistory(prevHistory => [...prevHistory, msg]);
+        }
+        setSystemMessage(msg.text);
     }
 
     const onOpen = () => {
@@ -41,6 +44,7 @@ const ChatComponent = () => {
 
     const onClose = () => {
         setIsConnected(false);
+        setSystemMessage(null)
         console.log("onClose");
     }
 
@@ -50,6 +54,7 @@ const ChatComponent = () => {
     }
 
     const onSendMessage = (msg: Message) => {
+        setSystemMessage(null)
         setHistory(prevHistory => [...prevHistory, msg]);
     }
 
@@ -57,9 +62,10 @@ const ChatComponent = () => {
         <div className="flex items-center justify-center h-screen bg-gray-100">
             <div className="flex flex-col w-full max-w-2xl h-5/6 mx-auto rounded-lg overflow-hidden shadow-xl bg-white">
                 <ChatBar />
+                <p className="text-xs text-gray-500 italic text-center">{systemMessage}</p>
                 <ChatHistory history={history}/>
                 {isConnected ?
-                    <ChatInput socket={socketRef.current} onSendMessage={onSendMessage} /> :
+                    <ChatInput socket={socketRef.current} onSendMessage={onSendMessage}/> :
                     <div className="p-4 bg-gray-100 text-center">
                         <div className="flex items-center justify-center space-x-2">
                             <div className="w-3 h-3 bg-gray-400 rounded-full animate-pulse"></div>
