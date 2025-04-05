@@ -4,9 +4,9 @@ export interface ChatInputProps {
     socket?: WebSocket
 }
 export interface Message{
-    Id?: string;
-    Text: string;
-    Timestamp?: string;
-    Incoming? : boolean;
-    SystemMessage? : SystemMessageType | undefined;
+    id?: string;
+    text: string;
+    timestamp?: string;
+    incoming? : boolean;
+    systemMessage? : SystemMessageType | undefined;
 }

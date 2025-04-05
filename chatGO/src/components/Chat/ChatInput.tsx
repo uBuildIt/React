@@ -19,9 +19,9 @@ const ChatInput = (props: ChatInputProps) => {
         setIsSending(true);
 
         const message: Message = {
-            Id: uuidv4(),
-            Text: msgStr,
-            Timestamp: moment().format("DD.MM.YYYY HH:mm:ss")
+            id: uuidv4(),
+            text: msgStr,
+            timestamp: moment().format("DD.MM.YYYY HH:mm:ss")
         };
 
         if (props.socket) {
