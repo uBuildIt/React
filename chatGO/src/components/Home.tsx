@@ -8,11 +8,12 @@ import {getLocalStorageItem} from "../utilities/lib/localStorage.tsx";
 const Home = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+    const [chatKey, setChatKey] = useState(0);
 
     const handleLogin = () => {
         if (!isLoggedIn) {
             setIsLoggedIn(true);
-            window.location.reload();
+            setChatKey((prev) => prev + 1);
         }
     }
 

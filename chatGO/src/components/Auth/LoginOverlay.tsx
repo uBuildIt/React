@@ -10,24 +10,28 @@ interface LoginOverlayProps {
 const LoginOverlay: React.FC<LoginOverlayProps> = ({onLoginSuccess}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("Logging in with", {email, password});
-        logIn(
-            {data: {email: email, password: password}},
-        ).then((res) => {
+        if (isLoading) return;
+        setIsLoading(true);
+        console.log("Logging in with", { email, password });
+
+        try {
+            const res = await logIn({ data: { email, password } });
             console.log(res.data);
-                if (res.data.error) {
-                    toast.error(res.data.message);
-                } else {
-                    setLocalStorageItem("token", res.data.data.token);
-                    onLoginSuccess()
-                }
+            if (res.data.error) {
+                toast.error(res.data.message);
+            } else {
+                setLocalStorageItem("token", res.data.data.token);
+                onLoginSuccess();
             }
-        ).catch((err) => {
-            toast.error(err.response.data);
-        })
+        } catch (err: any) {
+            toast.error(err?.response?.data || "Login failed");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -57,9 +61,10 @@ const LoginOverlay: React.FC<LoginOverlayProps> = ({onLoginSuccess}) => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition"
+                        className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
+                        disabled={isLoading}
                     >
-                        Login
+                        {isLoading ? "Logging in..." : "Login"}
                     </button>
                 </form>
             </div>

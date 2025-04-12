@@ -1,4 +1,5 @@
 import {Power} from 'react-feather';
+import React from "react";
 
 interface ChatBarProps {
     groupName?: string
@@ -7,7 +8,8 @@ interface ChatBarProps {
 
 const ChatBar = ({groupImage, groupName}: ChatBarProps) => {
 
-    const handleLogOut = () => {
+    const handleLogOut = (e : React.FormEvent) => {
+        e.preventDefault();
         localStorage.removeItem('token');
         window.location.reload();
     }
