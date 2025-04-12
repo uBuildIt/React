@@ -23,7 +23,7 @@ const Home = () => {
             setIsLoggedIn(true)
         }
         setIsCheckingAuth(false);
-    }, [isLoggedIn])
+    }, [])
     return (
         <div className="relative w-full h-screen">
             {isCheckingAuth ?
@@ -33,7 +33,7 @@ const Home = () => {
                     </div>
                 ) : (
                     <>
-                        <ChatComponent/>
+                        <ChatComponent key={chatKey} />
                         {!isLoggedIn && (
                             // <SecretKeyLogin onUnlock={() => setIsLoggedIn(true)}/>
                             <LoginOverlay onLoginSuccess={handleLogin}/>
