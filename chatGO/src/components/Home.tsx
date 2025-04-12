@@ -12,6 +12,7 @@ const Home = () => {
     const handleLogin = () => {
         if (!isLoggedIn) {
             setIsLoggedIn(true);
+            window.location.reload();
         }
     }
 

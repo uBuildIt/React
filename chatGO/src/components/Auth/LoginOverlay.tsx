@@ -26,7 +26,7 @@ const LoginOverlay: React.FC<LoginOverlayProps> = ({onLoginSuccess}) => {
                 }
             }
         ).catch((err) => {
-            toast.error(err);
+            toast.error(err.response.data);
         })
     };
 
