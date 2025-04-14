@@ -17,10 +17,11 @@ const ChatHistory = (props: ChatHistoryProps) => {
                 {props?.history && props.history.length > 0 ? (
                     <div className="space-y-3">
                         {props.history.map((msg: Message, index: number) => {
-                            const isIncoming = msg.Incoming;
+                            const isIncoming = msg.incoming;
+                            {console.log(`msg ${msg.incoming}`)}
                             return (
                                 // TODO: A SEPARATE COMPONENT
-                                <div key={msg.Id || index} className="flex">
+                                <div key={msg.id || index} className="flex">
                                     <div
                                         className={`relative max-w-xs px-4 py-2 rounded-lg shadow-sm ${
                                             isIncoming
@@ -28,10 +29,10 @@ const ChatHistory = (props: ChatHistoryProps) => {
                                                 : "bg-teal-500 text-white ml-auto"
                                         }`}
                                     >
-                                        <p className={`${isIncoming ? "text-gray-800" : "text-white"} break-words whitespace-pre-wrap`}>{msg.Text}</p>
+                                        <p className={`${isIncoming ? "text-gray-800" : "text-white"} break-words whitespace-pre-wrap`}>{msg.text}</p>
                                         <span
                                             className={`block text-xs mt-1 text-right ${isIncoming ? "text-gray-500" : "text-teal-100"}`}>
-                                            {msg.Timestamp} {/* Use your formatting function */}
+                                            {msg.timestamp} {/* Use your formatting function */}
                                         </span>
                                     </div>
                                 </div>

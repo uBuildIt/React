@@ -19,7 +19,6 @@ const createWebsocket = (props: WebsocketProps ) => {
     }
     socket.onmessage = (e) => {
         props.onMessage(e.data)
-        console.log("Received message", e.data);
     }
     socket.onerror = (e) => {
         props.onError(e)

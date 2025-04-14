@@ -1,4 +1,5 @@
-import {MoreVertical} from 'react-feather';
+import {Power} from 'react-feather';
+import React from "react";
 
 interface ChatBarProps {
     groupName?: string
@@ -6,6 +7,13 @@ interface ChatBarProps {
 }
 
 const ChatBar = ({groupImage, groupName}: ChatBarProps) => {
+
+    const handleLogOut = (e : React.FormEvent) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.reload();
+    }
+
     return (
         <div className="bg-teal-800 p-3 flex items-center justify-between z-50">
             <div className="flex items-center">
@@ -24,7 +32,7 @@ const ChatBar = ({groupImage, groupName}: ChatBarProps) => {
             </div>
 
             <button className="text-white hover:text-green-200">
-                <MoreVertical className="h-6 w-6"/>
+                <Power onClick={handleLogOut} className="h-6 w-6"/>
             </button>
         </div>
     );

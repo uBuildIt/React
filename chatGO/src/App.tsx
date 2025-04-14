@@ -1,14 +1,12 @@
 
 import './App.css'
-import ChatComponent from "./components/Chat/ChatComponent.tsx";
-
-
+import Home from "./components/Home.tsx";
 function App() {
-  return (
-      <div className="App">
-          <ChatComponent/>
-      </div>
-  )
+
+    return (
+        <Home/>
+    );
+
 }
 
 export default App
