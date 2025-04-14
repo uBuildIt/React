@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {logIn} from "../../services/api/auth.tsx";
 import {ToastContainer, toast} from 'react-toastify';
 import {setLocalStorageItem} from "../../utilities/lib/localStorage.tsx"
+import {Loader} from "lucide-react";
 
 interface LoginOverlayProps {
     onLoginSuccess: () => void;
@@ -59,13 +60,18 @@ const LoginOverlay: React.FC<LoginOverlayProps> = ({onLoginSuccess}) => {
                             required
                         />
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
-                        disabled={isLoading}
-                    >
-                        {isLoading ? "Logging in..." : "Login"}
-                    </button>
+                    <div className="flex flex-col items-center gap-2">
+                        <button
+                            type="submit"
+                            className="w-full bg-teal-600 text-white py-2 rounded-lg hover:bg-teal-700 transition disabled:opacity-50"
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Logging in..." : "Login"}
+                        </button>
+                        {isLoading && (
+                            <Loader className="w-5 h-5 animate-spin text-teal-600" />
+                        )}
+                    </div>
                 </form>
             </div>
             <ToastContainer/>
